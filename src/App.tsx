@@ -21,7 +21,9 @@ function Square(props: squareProps) {
 
 interface boardState {
   squares: any[],
-  xIsNext: boolean
+  xIsNext: boolean,
+  left: number
+  status: string
 }
 
 class Board extends React.Component<{}, boardState> {
@@ -29,7 +31,9 @@ class Board extends React.Component<{}, boardState> {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
-      xIsNext: true
+      xIsNext: true,
+      left: 9,
+      status: ""
     };
   }
 
@@ -41,7 +45,8 @@ class Board extends React.Component<{}, boardState> {
     squares[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
       squares: squares,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      left: (this.state.left - 1)
     });
   }
 
@@ -53,26 +58,28 @@ class Board extends React.Component<{}, boardState> {
       />
     );
   }
-  
-  restart() {
-    this.setState({
-      squares: Array(9).fill(null)
-    })
-  }
 
   render(): ReactNode {
     const title = <h1 id = "title">Tic Tac Toe</h1>;
     const winner = calculateWinner(this.state.squares);
-    let status;
+    let status = this.state.status;
     if (winner) {
       status = 'Winner: ' + winner;
-    } else {
+    } else if (this.state.left > 0) {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    } else {
+      status = 'Draw';
     }
+
     const restart = (<button 
                       type="button" 
                       className="btn btn-primary btn-lg"
-                      onClick = {() => {this.setState({squares: Array(9).fill(null)})}}
+                      onClick = {() => {
+                        this.setState({
+                          squares: Array(9).fill(null),
+                          left: 9
+                        })
+                      }}
                       >
                       Restart
                     </button>);

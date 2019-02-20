@@ -10,12 +10,12 @@ interface squareProps {
 
 function Square(props: squareProps) {
     return (
-      <button 
-        className="square" 
+      <div 
+        className="square col-3 col-lg-2" 
         onClick={props.onClick}
       >
         {props.value}
-      </button>
+      </div>
     );
 }
 
@@ -54,7 +54,14 @@ class Board extends React.Component<{}, boardState> {
     );
   }
   
+  restart() {
+    this.setState({
+      squares: Array(9).fill(null)
+    })
+  }
+
   render(): ReactNode {
+    const title = <h1 id = "title">Tic Tac Toe</h1>;
     const winner = calculateWinner(this.state.squares);
     let status;
     if (winner) {
@@ -62,25 +69,33 @@ class Board extends React.Component<{}, boardState> {
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
-
+    const restart = (<button 
+                      type="button" 
+                      className="btn btn-primary btn-lg"
+                      onClick = {() => {this.setState({squares: Array(9).fill(null)})}}
+                      >
+                      Restart
+                    </button>);
     return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
+      <div className="container">
+        <div className="status">{title}</div>
+        <div className="row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
-        <div className="board-row">
+        <div className="row">
           {this.renderSquare(3)}
           {this.renderSquare(4)}
           {this.renderSquare(5)}
         </div>
-        <div className="board-row">
+        <div className="row">
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        <div className="status">{status}</div>
+        <div className="status">{restart}</div>
       </div>
     );
   }

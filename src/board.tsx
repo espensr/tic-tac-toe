@@ -1,7 +1,10 @@
 import React, { Component, ReactNode } from 'react';
 import { boardState } from './models'
-import { Square, calculateWinner } from './methods'
+import { Square } from './square'
+import { calculateWinner } from './calcWinner';
 import './App.css';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 class Board extends React.Component<{}, boardState> {
     constructor(props: {}) {
@@ -49,9 +52,11 @@ class Board extends React.Component<{}, boardState> {
         status = 'Draw';
       }
   
-      const restart = (<button 
-                        type="button" 
-                        className="btn btn-primary btn-lg"
+      const restart = (<Button 
+                        variant="contained" 
+                        color="primary"
+                        size={"large"}
+                        className="button"
                         onClick = {() => {
                           this.setState({
                             squares: Array(9).fill(null),
@@ -60,29 +65,35 @@ class Board extends React.Component<{}, boardState> {
                         }}
                         >
                         Restart
-                      </button>);
+                      </Button>);
 
       return (
-        <div className="container">
+        <Grid container justify="center">
           <div className="info">{title}</div>
-          <div className="row row-top">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="row row-bottom">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
+          <Grid item xs={12} md={10} lg={8}>
+            <Grid container justify="center" className="row-top">
+                {this.renderSquare(0)}
+                {this.renderSquare(1)}
+                {this.renderSquare(2)}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={10} lg={8}>
+            <Grid container justify="center">
+                {this.renderSquare(3)}
+                {this.renderSquare(4)}
+                {this.renderSquare(5)}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={10} lg={8}>
+            <Grid container justify="center" className="row-bottom">
+                {this.renderSquare(6)}
+                {this.renderSquare(7)}
+                {this.renderSquare(8)}
+            </Grid>
+          </Grid>
           <div className="info">{status}</div>
           <div className="info">{restart}</div>
-        </div>
+        </Grid>
       );
     }
   }

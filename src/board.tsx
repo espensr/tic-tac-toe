@@ -65,7 +65,7 @@ class Board extends React.Component<{}, boardState> {
       return (
         <div className="container">
           <div className="info">{title}</div>
-          <div className="row">
+          <div className="row row-top">
             {this.renderSquare(0)}
             {this.renderSquare(1)}
             {this.renderSquare(2)}
@@ -75,7 +75,7 @@ class Board extends React.Component<{}, boardState> {
             {this.renderSquare(4)}
             {this.renderSquare(5)}
           </div>
-          <div className="row">
+          <div className="row row-bottom">
             {this.renderSquare(6)}
             {this.renderSquare(7)}
             {this.renderSquare(8)}

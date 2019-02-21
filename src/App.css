@@ -17,20 +17,20 @@ Board layout and design
   justify-content: center;
 }
 
-.row-top div:nth-of-type(1) {
-  border-radius: 15px 0 0 0;
+.row-top div:nth-of-type(1) div:nth-of-type(1) {
+  border-radius: 10px 0 0 0;
 }
 
-.row-top div:nth-of-type(3) {
-  border-radius: 0 15px 0 0;
+.row-top div:nth-of-type(3) div:nth-of-type(1) {
+  border-radius: 0 10px 0 0;
 }
 
-.row-bottom div:nth-of-type(1) {
-  border-radius: 0 0 0 15px;
+.row-bottom div:nth-of-type(3) div:nth-of-type(1) {
+  border-radius: 0 0 10px 0;
 }
 
-.row-bottom div:nth-of-type(3) {
-  border-radius: 0 0 15px 0;
+.row-bottom div:nth-of-type(1) div:nth-of-type(1) {
+  border-radius: 0 0 0 10px;
 }
 
 .square {
@@ -47,6 +47,14 @@ Board layout and design
   font-size: 1.5em;
   margin-top: 10px;
   width: 100%;
+}
+
+Button.MuiButton-containedPrimary-110 {
+  background-color: #57a5ff;
+}
+
+Button.MuiButton-containedPrimary-110:hover {
+  background-color: #2997ff;
 }
 
 /************

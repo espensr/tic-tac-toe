@@ -1,16 +1,5 @@
-import React, { Component, ReactNode } from 'react';
-import { squareProps, inputValue } from './models';
-
-export function Square(props: squareProps) {
-    return (
-      <div 
-        className="square col-3 col-lg-2" 
-        onClick={props.onClick}
-      >
-        {props.value}
-      </div>
-    );
-}
+import React, { Component } from 'react';
+import { inputValue } from './models';
 
 export function calculateWinner(squares: Array<inputValue>): inputValue {
     const lines = [
